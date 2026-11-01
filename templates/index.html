@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌾 Kisan Awaaz — किसान आवाज़</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🌾 किसान आवाज़</h1>
+            <p class="subtitle">Kisan Awaaz — Voice-First Agronomy Hotline</p>
+        </header>
+
+        <!-- Input Section -->
+        <main>
+            <form id="queryForm" enctype="multipart/form-data">
+                <!-- Voice Input -->
+                <section class="card voice-card">
+                    <h2>🎤 अपनी बात बोलें <span class="en">(Speak your query)</span></h2>
+                    <div class="voice-controls">
+                        <button type="button" id="recordBtn" class="btn btn-record">
+                            <span class="icon">🎙️</span>
+                            <span class="label">बोलना शुरू करें</span>
+                        </button>
+                        <div id="recordingIndicator" class="recording-indicator hidden">
+                            <div class="pulse"></div>
+                            <span>रिकॉर्डिंग हो रही है… <span id="timer">0:00</span></span>
+                            <button type="button" id="stopBtn" class="btn btn-stop">⏹ रुकें</button>
+                        </div>
+                        <div id="audioPreview" class="audio-preview hidden">
+                            <audio id="previewPlayer" controls></audio>
+                            <button type="button" id="clearAudio" class="btn btn-small btn-outline">✕ हटाएं</button>
+                        </div>
+                    </div>
+                    <div class="divider"><span>या / or</span></div>
+                    <div class="text-input">
+                        <textarea id="textQuery" name="text_query" rows="2"
+                            placeholder="टाइप करें… (Type your question here)"></textarea>
+                    </div>
+                </section>
+
+                <!-- Photo Upload -->
+                <section class="card">
+                    <h2>📷 फसल/पत्ती की फोटो <span class="en">(Crop/leaf photo — optional)</span></h2>
+                    <div class="upload-zone" id="photoZone" data-input="photoInput">
+                        <input type="file" id="photoInput" name="photo" accept="image/*" style="display: none;">
+                        <div class="upload-content">
+                            <span class="upload-icon">🌿</span>
+                            <p>फोटो यहाँ खींचें या <span class="btn-link">चुनें / फोटो लें</span></p>
+                            <span class="sub-text">(Click or drag image here)</span>
+                        </div>
+                        <div class="preview-container hidden" id="photoPreview">
+                            <img id="photoThumb" alt="Preview">
+                            <button type="button" class="btn btn-small btn-outline remove-btn" data-target="photoInput">✕</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Soil Health Card Upload -->
+                <section class="card">
+                    <h2>🧪 मिट्टी स्वास्थ्य कार्ड <span class="en">(Soil health card — optional)</span></h2>
+                    <div class="upload-zone" id="docZone" data-input="docInput">
+                        <input type="file" id="docInput" name="document" accept="image/*,.pdf" style="display: none;">
+                        <div class="upload-content">
+                            <span class="upload-icon">📄</span>
+                            <p>कार्ड की फोटो/PDF यहाँ खींचें या <span class="btn-link">चुनें</span></p>
+                            <span class="sub-text">(Click or drag card image/PDF here)</span>
+                        </div>
+                        <div class="preview-container hidden" id="docPreview">
+                            <img id="docThumb" alt="Preview">
+                            <span id="docFileName" class="file-name"></span>
+                            <button type="button" class="btn btn-small btn-outline remove-btn" data-target="docInput">✕</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Options & Submit -->
+                <section class="card submit-card">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="reportCheckbox" name="generate_report" value="true">
+                        <span>📋 रिपोर्ट भी बनाएं <span class="en">(Generate report)</span></span>
+                    </label>
+                    <button type="submit" id="submitBtn" class="btn btn-primary btn-large">
+                        🌾 सलाह लें — Get Advice
+                    </button>
+                </section>
+            </form>
+
+            <!-- Loading State -->
+            <div id="loading" class="card loading-card hidden">
+                <div class="spinner"></div>
+                <p id="loadingText">आपकी बात सुनी जा रही है…</p>
+                <div class="progress-steps">
+                    <div class="step" id="step-stt">🎤 ट्रांसक्रिप्शन</div>
+                    <div class="step" id="step-photo">📷 फोटो विश्लेषण</div>
+                    <div class="step" id="step-soil">🧪 मिट्टी डेटा</div>
+                    <div class="step" id="step-llm">🧠 सलाह तैयार हो रही है</div>
+                    <div class="step" id="step-tts">🔊 आवाज़ बन रही है</div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="hidden">
+                <!-- Transcript -->
+                <section class="card result-card">
+                    <h2>📝 आपने क्या कहा <span class="en">(Transcript)</span></h2>
+                    <p id="resultTranscript" class="transcript-text"></p>
+                    <p id="resultLanguage" class="meta-text"></p>
+                </section>
+
+                <!-- Photo Analysis -->
+                <section class="card result-card hidden" id="resultPhotoCard">
+                    <h2>🌿 फोटो विश्लेषण <span class="en">(Photo Analysis)</span></h2>
+                    <p id="resultPhotoAnalysis"></p>
+                </section>
+
+                <!-- Soil Data -->
+                <section class="card result-card hidden" id="resultSoilCard">
+                    <h2>🧪 मिट्टी डेटा <span class="en">(Soil Health Data)</span></h2>
+                    <div id="resultSoilData"></div>
+                </section>
+
+                <!-- Advice -->
+                <section class="card result-card advice-card">
+                    <h2>💡 सलाह <span class="en">(Advisory)</span></h2>
+                    <div id="resultAdvice" class="advice-text"></div>
+                    <div class="audio-response">
+                        <h3>🔊 सुनें <span class="en">(Listen)</span></h3>
+                        <audio id="advicePlayer" controls></audio>
+                    </div>
+                </section>
+
+                <!-- Report -->
+                <section class="card result-card hidden" id="resultReportCard">
+                    <h2>📋 रिपोर्ट <span class="en">(Report)</span></h2>
+                    <div class="report-actions">
+                        <button type="button" id="downloadReport" class="btn btn-primary">
+                            📥 रिपोर्ट डाउनलोड करें
+                        </button>
+                        <button type="button" id="printReport" class="btn btn-outline">
+                            🖨️ प्रिंट करें
+                        </button>
+                    </div>
+                </section>
+
+                <!-- New Query -->
+                <section class="card submit-card">
+                    <button type="button" id="newQueryBtn" class="btn btn-primary btn-large">
+                        🔄 नई बात पूछें — Ask Another Question
+                    </button>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <p>🌾 Kisan Awaaz — Powered by <a href="https://sarvam.ai" target="_blank">Sarvam AI</a></p>
+            <p class="disclaimer">⚠️ यह AI-जनित सलाह है। गंभीर मामलों में KVK/कृषि विशेषज्ञ से अवश्य परामर्श करें।</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

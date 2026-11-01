@@ -1,0 +1,23 @@
+# Secrets
+.env
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Generated audio/media
+*.wav
+*.mp3
+*.ogg
+*.webm
+*.m4a
+
+# OS files
+.DS_Store
+Thumbs.db

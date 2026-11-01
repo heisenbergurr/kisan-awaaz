@@ -1,0 +1,575 @@
+/* 🌾 Kisan Awaaz — Modern Agronomy Hotline Styles */
+
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #40916c;
+    --primary-dark: #1b4332;
+    --accent: #d8f3dc;
+    --accent-gold: #e9c46a;
+    --accent-red: #e76f51;
+    --bg: #f4f7f5;
+    --surface: #ffffff;
+    --text-dark: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.03);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 20px 12px;
+}
+
+.container {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 16px 8px;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    color: var(--primary-dark);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+header .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-light);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* Cards */
+.card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.card h2 .en {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Voice Card & Recorder */
+.voice-card {
+    border-top: 4px solid var(--primary);
+}
+
+.voice-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-large {
+    padding: 16px 32px;
+    font-size: 1.15rem;
+    border-radius: var(--radius-md);
+    width: 100%;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-record {
+    background: #e76f51;
+    color: white;
+    font-size: 1.15rem;
+    padding: 16px 32px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(231, 111, 81, 0.35);
+}
+
+.btn-record:hover {
+    background: #d45d3f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(231, 111, 81, 0.45);
+}
+
+.btn-record .icon {
+    font-size: 1.4rem;
+}
+
+.btn-stop {
+    background: #dc2626;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dark);
+}
+
+.btn-outline:hover {
+    background: #f9fafb;
+    border-color: #cbd5e1;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0 2px;
+}
+
+/* Recording Pulse Indicator */
+.recording-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fee2e2;
+    padding: 12px 20px;
+    border-radius: 50px;
+    color: #991b1b;
+    font-weight: 600;
+    border: 1px solid #fecaca;
+}
+
+.pulse {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #dc2626;
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+}
+
+.audio-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f3f4f6;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    max-width: 480px;
+}
+
+.audio-preview audio {
+    width: 100%;
+    height: 38px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 16px 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border);
+}
+
+.divider span {
+    padding: 0 12px;
+}
+
+.text-input textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.text-input textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+}
+
+/* Upload Dropzones */
+.upload-zone {
+    border: 2px dashed #cbd5e1;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    background: #fafafa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--primary);
+    background: #f0fdf4;
+}
+
+.upload-icon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.upload-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.sub-text {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    display: block;
+    margin-top: 4px;
+}
+
+.preview-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+}
+
+.preview-container img {
+    max-width: 140px;
+    max-height: 140px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    object-fit: cover;
+}
+
+.file-name {
+    font-weight: 500;
+    color: var(--primary-dark);
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.remove-btn {
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fca5a5;
+}
+
+/* Options & Submit */
+.submit-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1rem;
+    color: var(--primary-dark);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.checkbox-label .en {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Loading Card */
+.loading-card {
+    text-align: center;
+    padding: 36px 20px;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--accent);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#loadingText {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+}
+
+.progress-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 320px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.progress-steps .step {
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    background: #f3f4f6;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.progress-steps .step.active {
+    background: #d8f3dc;
+    color: var(--primary-dark);
+    font-weight: 700;
+    border-left: 4px solid var(--primary);
+}
+
+.progress-steps .step.done {
+    background: #e5e7eb;
+    color: #4b5563;
+    text-decoration: line-through;
+}
+
+/* Results */
+.result-card {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.transcript-text {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #111827;
+    background: #f9fafb;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid #9ca3af;
+    font-style: italic;
+}
+
+.meta-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.advice-card {
+    background: #f0fdf4;
+    border: 2px solid #bbf7d0;
+}
+
+.advice-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #064e3b;
+    white-space: pre-line;
+    margin-bottom: 20px;
+}
+
+.advice-text strong, .advice-text b {
+    color: #047857;
+}
+
+.audio-response {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #bbf7d0;
+}
+
+.audio-response h3 {
+    font-size: 1.05rem;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.audio-response audio {
+    width: 100%;
+}
+
+.report-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Soil data table in results */
+.soil-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+.soil-table th, .soil-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.soil-table th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 36px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 16px 0;
+}
+
+footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer .disclaimer {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.75rem;
+    }
+    .card {
+        padding: 18px 14px;
+    }
+    .btn-record {
+        width: 100%;
+        padding: 14px 20px;
+    }
+    .report-actions {
+        flex-direction: column;
+    }
+}
